@@ -14,10 +14,10 @@ FINAL=obj/liblmon.so
 .PHONY : all install uninstall clean
 
 all : obj/liblmon.so
+	mkdir -p obj
 
 obj/liblmon.so : $(OBJECTS)
 	$(CC) $(CFLAGS) -shared -fPIC $^ $(XFCE4_PANEL_2_0_LIBS) -o $@
-	strip $@
 
 obj/lmon.o : src/lmon.c $(HEADERS)
 	$(CC) $(CFLAGS) -Iinclude -fPIC $(XFCE4_PANEL_2_0_INCS) -c $< -o $@
