@@ -1,0 +1,35 @@
+<interface>
+	<object id="box" class="GtkBox">
+		<property name="margin-start">5</property>
+		<property name="margin-end">5</property>
+		<property name="spacing">5</property>
+		<child>
+			<object class="GtkLabel">
+				<property name="label">CPU</property>
+				<property name="valign">baseline</property>
+				<style> <class name="small_label" /> </style>
+			</object>
+		</child>
+		<child>
+			<object id="cpuvalue" class="GtkLabel">
+				<property name="label">cpuvalue</property>
+				<property name="valign">baseline</property>
+				<style> <class name="default" /> </style>
+			</object>
+		</child>
+		<child>
+			<object class="GtkLabel">
+				<property name="label">MEM</property>
+				<property name="valign">baseline</property>
+				<style> <class name="small_label" /> </style>
+			</object>
+		</child>
+		<child>
+			<object id="memvalue" class="GtkLabel">
+				<property name="label">memvalue</property>
+				<property name="valign">baseline</property>
+				<style> <class name="default" /> </style>
+			</object>
+		</child>
+	</object>
+</interface>

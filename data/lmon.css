@@ -1,0 +1,9 @@
+.default {
+	color: #ffffff;
+	font: 11px sans;
+}
+
+.small_label {
+	color: #808080;
+	font: 10px sans;
+}
