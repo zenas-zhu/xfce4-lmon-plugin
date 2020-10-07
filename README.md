@@ -4,8 +4,14 @@ Loads monitor for the Xfce4 panel, shows cpu and memory usage as percentages
 
 ##### Installation
 
-`make && sudo make install`
+```
+./configure
+make
+sudo make install
+```
 
-##### Todo
+##### ???
 
-- [ ] Figure out how to use the GNU autotools
+- [x] Figure out how to use the GNU autotools
+- [ ] is it supposed to install a liblmon.la
+- [ ] `make dist` just ignores some files
