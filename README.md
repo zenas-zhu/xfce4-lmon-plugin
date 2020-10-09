@@ -12,6 +12,4 @@ sudo make install
 
 ##### ???
 
-- [x] Figure out how to use the GNU autotools
 - [ ] is it supposed to install a liblmon.la
-- [ ] `make dist` just ignores some files
