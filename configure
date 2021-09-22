@@ -1,17 +1,21 @@
 #!/bin/sh
 
-eval set -- "$(getopt -o "hd:c" --long "help,destdir:,clean" -n "$0" -- "$@")"
+CC=${CC:-clang}
+
+eval set -- "$(getopt -o "hc" --long "help,destdir:,cc:,clean" -n "$0" -- "$@")"
 while true ; do
 	case "$1" in
 		"-h" | "--help" )
 			echo "Usage: $0 [OPTIONS]..."
 			echo
 			echo "Optional arguments:"
-			echo "  -h    , --help"
-			echo "  -d DIR, --destdir=DIR"
-			echo "  -c    , --clean"
+			echo "  -h, --help"
+			echo "      --destdir=DIR"
+			echo "      --cc=CC"
+			echo "  -c, --clean"
 			exit ;;
-		"-d" | "--destdir" ) DESTDIR=$2 ; shift 2 ;;
+		"--destdir" ) DESTDIR=$2 ; shift 2 ;;
+		"--cc" ) CC=$2 ; shift 2 ;;
 		"-c" | "--clean" )
 			if [ -f "build.ninja" ] ; then
 				ninja -t clean
@@ -28,10 +32,10 @@ SHARE_DIR="$DESTDIR/usr/share/xfce4/panel/plugins"
 LIB_DIR="$DESTDIR/usr/lib/xfce4/panel/plugins"
 
 cat > build.ninja << EOF
-cc = clang
+cc = $CC
 cflags = -g -Wall -Wextra
-iflags = -Iinclude $(pkg-config --cflags libxfce4panel-2.0)
-ldflags = -shared $(pkg-config --libs libxfce4panel-2.0)
+iflags = -fPIC -Iinclude $(pkg-config --cflags libxfce4panel-2.0)
+ldflags = -fPIC -shared $(pkg-config --libs libxfce4panel-2.0)
 
 rule cc
  command = \$cc \$cflags \$iflags -c \$in -o \$out
@@ -50,13 +54,13 @@ build obj/lmon_resource.o: bin data/lmon.ui data/lmon.css
 # sacrilege follows
 
 rule installshare
- command = install -m644 \$in $SHARE_DIR
+ command = install -D -m644 -t $SHARE_DIR/ \$in
 
 rule installlib
- command = install -m755 \$in $LIB_DIR
+ command = install -D -m755 -t $LIB_DIR/ \$in
 
 rule uninstall
- command = rm \$in
+ command = rm -f \$in
 
 build installshare: installshare data/lmon.desktop
 build installlib: installlib liblmon.so
