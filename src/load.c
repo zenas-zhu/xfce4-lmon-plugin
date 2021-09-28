@@ -61,5 +61,13 @@ void measure_mem(LMonData *data)
 
 void measure_load(LMonData *data)
 {
-	gtk_label_set_text(GTK_LABEL(data->loadvalue), "0.00 · 0.00 · 0.00");
+	double loadavg[3];
+	if (getloadavg(loadavg, 3) < 0) {
+		g_warning("can't read load averages");
+		return;
+	}
+	static char label[36]; // will not support 3 numbers exceeding 1M
+	snprintf(label, 36, "%.2f · %.2f · %.2f",
+		loadavg[0], loadavg[1], loadavg[2]);
+	gtk_label_set_text(GTK_LABEL(data->loadvalue), label);
 }
