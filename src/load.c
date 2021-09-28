@@ -58,3 +58,8 @@ void measure_mem(LMonData *data)
 	snprintf(label, 7, "%04.1f%%", 100.0 * (total - avail) / total);
 	gtk_label_set_text(GTK_LABEL(data->memvalue), label);
 }
+
+void measure_load(LMonData *data)
+{
+	gtk_label_set_text(GTK_LABEL(data->loadvalue), "0.00 · 0.00 · 0.00");
+}

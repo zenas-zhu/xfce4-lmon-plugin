@@ -1,7 +1,10 @@
 <interface>
-	<object id="box" class="GtkBox">
+	<object id="root" class="GtkEventBox">
 		<property name="margin-start">5</property>
 		<property name="margin-end">5</property>
+		<signal name="button-press-event" handler="click" />
+	</object>
+	<object id="percents_box" class="GtkBox">
 		<property name="spacing">5</property>
 		<child>
 			<object class="GtkLabel">
@@ -12,7 +15,6 @@
 		</child>
 		<child>
 			<object id="cpuvalue" class="GtkLabel">
-				<property name="label">cpuvalue</property>
 				<property name="valign">baseline</property>
 				<style> <class name="default" /> </style>
 			</object>
@@ -26,7 +28,22 @@
 		</child>
 		<child>
 			<object id="memvalue" class="GtkLabel">
-				<property name="label">memvalue</property>
+				<property name="valign">baseline</property>
+				<style> <class name="default" /> </style>
+			</object>
+		</child>
+	</object>
+	<object id="loads_box" class="GtkBox">
+		<property name="spacing">5</property>
+		<child>
+			<object class="GtkLabel">
+				<property name="label">LOAD</property>
+				<property name="valign">baseline</property>
+				<style> <class name="small_label" /> </style>
+			</object>
+		</child>
+		<child>
+			<object id="loadvalue" class="GtkLabel">
 				<property name="valign">baseline</property>
 				<style> <class name="default" /> </style>
 			</object>
