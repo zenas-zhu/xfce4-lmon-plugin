@@ -48,12 +48,6 @@ static void lmon_delete(XfcePanelPlugin *plugin, LMonData *data)
 {
 	(void)plugin;
 	g_source_remove(data->timer);
-	gtk_widget_destroy(data->root);
-	if (data->side) {
-		gtk_widget_destroy(data->boxa);
-	} else {
-		gtk_widget_destroy(data->boxb);
-	}
 	g_object_unref(data->b);
 	g_object_unref(data->s);
 	g_slice_free(LMonData, data);
