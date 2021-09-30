@@ -1,8 +1,8 @@
 <interface>
-	<object id="root" class="GtkEventBox">
+	<object id="root" class="GtkButton">
 		<property name="margin-start">5</property>
 		<property name="margin-end">5</property>
-		<signal name="button-press-event" handler="click" />
+		<signal name="clicked" handler="click" />
 	</object>
 	<object id="percents_box" class="GtkBox">
 		<property name="spacing">5</property>

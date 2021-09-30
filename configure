@@ -1,6 +1,6 @@
 #!/bin/sh
 
-CC=${CC:-clang}
+CC=${CC:-cc}
 
 eval set -- "$(getopt -o "hc" --long "help,destdir:,cc:,clean" -n "$0" -- "$@")"
 while true ; do

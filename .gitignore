@@ -2,5 +2,3 @@ obj
 liblmon.so
 build.ninja
 .ninja_log
-compile_commands.json
-.cache

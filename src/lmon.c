@@ -7,7 +7,7 @@
 static void lmon_new(XfcePanelPlugin *);
 static void lmon_delete(XfcePanelPlugin *, LMonData *);
 static gboolean lmon_tick(LMonData *);
-static void lmon_clicked(GtkWidget *, GdkEvent *, LMonData *);
+static void lmon_clicked(GtkButton *, LMonData *);
 
 XFCE_PANEL_PLUGIN_REGISTER(lmon_new);
 
@@ -33,15 +33,19 @@ static void lmon_new(XfcePanelPlugin *plugin)
 	data->memvalue = (GtkLabel *)gtk_builder_get_object(data->b, "memvalue");
 	data->loadvalue = (GtkLabel *)gtk_builder_get_object(data->b, "loadvalue");
 
+	gtk_container_add(GTK_CONTAINER(data->root), data->boxa);
+	gtk_widget_show_all(GTK_WIDGET(data->root));
+	gtk_widget_show_all(GTK_WIDGET(data->boxb));
+	gtk_container_add(GTK_CONTAINER(plugin), data->root);
+
+	data->side = false;
 	data->last_all = 0;
 
-	gtk_container_add(GTK_CONTAINER(data->root), data->boxa);
-	gtk_container_add(GTK_CONTAINER(plugin), data->root);
-	gtk_widget_show_all(GTK_WIDGET(plugin));
-	gtk_widget_show_all(GTK_WIDGET(data->boxb));
 	lmon_tick(data);
 	data->timer = g_timeout_add(1000, G_SOURCE_FUNC(lmon_tick), data);
-	data->side = false;
+
+	xfce_panel_plugin_menu_show_about(plugin);
+	xfce_panel_plugin_menu_show_configure(plugin);
 }
 
 static void lmon_delete(XfcePanelPlugin *plugin, LMonData *data)
@@ -61,10 +65,9 @@ static gboolean lmon_tick(LMonData *data)
 	return TRUE;
 }
 
-static void lmon_clicked(GtkWidget *widget, GdkEvent *event, LMonData *data)
+static void lmon_clicked(GtkButton *widget, LMonData *data)
 {
 	(void)widget;
-	(void)event;
 	if (data->side) {
 		gtk_container_remove(GTK_CONTAINER(data->root), data->boxb);
 		gtk_container_add(GTK_CONTAINER(data->root), data->boxa);
