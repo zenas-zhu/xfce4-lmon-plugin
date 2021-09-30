@@ -11,6 +11,7 @@ typedef struct {
 	GtkLabel *cpuvalue;
 	GtkLabel *memvalue;
 	GtkLabel *loadvalue;
+	GtkWindow *about;
 	GtkBuilder *b;
 	GtkCssProvider *s;
 	bool side;
@@ -18,6 +19,7 @@ typedef struct {
 	unsigned long long last_all;
 	int cpus;
 	guint timer;
+	bool aboutvisible;
 } LMonData;
 
 void measure_cpu(LMonData *);
